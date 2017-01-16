@@ -5,7 +5,7 @@
 
 
 (defn main-view []
-  [:div
+  [:div.container
    [components/title]
    [:div
     [calendar/calendar-view]]]
