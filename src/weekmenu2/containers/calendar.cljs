@@ -1,11 +1,12 @@
 (ns weekmenu2.containers.calendar
   (:require [cljs-time.core :as time]
+            [cljs-time.coerce :as coerce]
             [cljs-time.format :as time-format]))
 
 
 (def day-fm (time-format/formatter "EEE dd"))
-
 (def month-fm (time-format/formatter "MMM"))
+(def plain-date (time-format/formatter "dd-MM-YYYY"))
 
 
 (defn week-seq [base start end]
@@ -14,9 +15,15 @@
       (time/plus base (time/days (- x d)))
       )))
 
+
+(defn to-day-str [date-a]
+  (->> date-a
+      coerce/to-date-time
+      (time-format/unparse plain-date))
+  )
+
 (defn day-view [date marked]
   "Renders a day view"
-  (js/console.log marked)
   ;; MARKED IS ALWAYS FALSE!!!
   [:div {:class (if marked "marked") }
    [:p (time-format/unparse month-fm date)]
@@ -32,7 +39,7 @@
   ([base-day d-start d-end]
    [:ul.list-unstyled.list-inline.calendar-week
     (map
-     #(identity ^{:key %} [:li (day-view % (time/= % time/today))])
+     #(identity ^{:key %} [:li (day-view % (= (to-day-str %) (to-day-str (time/today))))])
      (week-seq base-day d-start d-end))]) 
   )
 
