@@ -11,7 +11,8 @@
                  [cljsjs/react-bootstrap "0.25.1-0"]]
 
   :plugins [[lein-cljsbuild "1.1.3"]
-            [lein-figwheel "0.5.4-5"]]
+            [lein-figwheel "0.5.4-5"]
+            [lein-less "1.7.5"]]
 
   :min-lein-version "2.5.0"
 
@@ -47,6 +48,9 @@
                          :pretty-print false}}}}
 
   :aliases {"release" ["do" "clean" ["cljsbuild" "once" "release"]]}
+  
+  :less {:source-paths ["src/less"]
+         :target-path "public/css"}
 
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.4-5"]
                                   [org.clojure/tools.nrepl "0.2.12"]
