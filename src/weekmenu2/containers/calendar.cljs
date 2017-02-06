@@ -24,7 +24,6 @@
 
 (defn day-view [date marked]
   "Renders a day view"
-  ;; MARKED IS ALWAYS FALSE!!!
   [:div {:class (if marked "marked") }
    [:p (time-format/unparse month-fm date)]
    [:p
@@ -39,7 +38,7 @@
   ([base-day d-start d-end]
    [:ul.list-unstyled.list-inline.calendar-week
     (map
-     #(identity ^{:key %} [:li (day-view % (= (to-day-str %) (to-day-str (time/today))))])
+     #(identity ^{:key %} [:li (day-view % (= (to-day-str %) (to-day-str (time/now))))])
      (week-seq base-day d-start d-end))]) 
   )
 
@@ -50,6 +49,3 @@
    [:li (week-view (time/now))]
    [:li (week-view (time/plus (time/now) (time/weeks 1)) 0 3)]]  
   )
-
-
-(comment (if true "foo" "bar"))
