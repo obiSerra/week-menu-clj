@@ -12,7 +12,11 @@
 
   :plugins [[lein-cljsbuild "1.1.3"]
             [lein-figwheel "0.5.4-5"]
-            [lein-less "1.7.5"]]
+            [lein-less "1.7.5"]
+            [lein-cooper "1.2.2"]]
+
+  :cooper {"cljs" ["lein" "figwheel"]
+           "web"  ["lein" "less" "auto"]}
 
   :min-lein-version "2.5.0"
 
